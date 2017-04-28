@@ -18,3 +18,4 @@ It installs ROS. Roscore will run if all procedures in this script are completed
 # tested on ...
 
 * Ubuntu 16.04 Server on Virtual Box
+* Ubuntu 16.04 Desktop on Virtual Box
