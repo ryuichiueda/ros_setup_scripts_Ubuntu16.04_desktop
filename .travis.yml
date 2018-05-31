@@ -1,9 +1,7 @@
-#before_install:
-#  - sudo add-apt-repository -y "deb http://archive.ubuntu.com/ubuntu/ trusty main universe"
-#  - sudo apt-get update -qq
-
+os: linux
 sudo: required
 dist: xenial
+language: generic
 
 branches:
   only: 
@@ -11,9 +9,18 @@ branches:
     - dev
     - /^hotfix.*$/
 
+before_install:
+  - sudo systemctl mask apt-daily.service
+  - sudo systemctl mask apt-daily.timer
+  - sudo systemctl mask apt-daily-upgrade.service
+  - sudo systemctl mask apt-daily-upgrade.timer
+  - bash ./.travis/wait_for_apt.sh
+
+install:
+  - sudo apt-get update -qq
+  - sudo apt-get remove -y postgresql*
+  - sudo apt-get upgrade -qq --allow-unauthenticated
+
 script:
-#  - export DEBIAN_FRONTEND=noninteractive
-#  - apt-get -o Dpkg::Options::="--force-confnew" install -y 
   - sh -e ./step0.bash
   - sh -e ./step1.bash
-
