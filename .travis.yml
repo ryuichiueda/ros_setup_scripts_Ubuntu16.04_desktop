@@ -8,6 +8,8 @@ dist: xenial
 branches:
   only: 
     - master
+    - dev
+    - /^hotfix.*$/
 
 script:
 #  - export DEBIAN_FRONTEND=noninteractive
